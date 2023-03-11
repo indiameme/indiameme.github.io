@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search for Verified Channels with Under 100k Subs</title>
+</head>
+<body>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script>
+    function searchChannels() {
+      // Initialize the client with API key
+      gapi.client.init({
+        apiKey: 'AIzaSyDuO77mrGY0iDO9o5jHFJHunnykupbtRJo'
+      }).then(function() {
+        // Make a request to the channels API to search for channels
+        return gapi.client.request({
+          path: 'youtube/v3/search',
+          params: {
+            part: 'snippet',
+            q: '',
+            type: 'channel',
+            maxResults: 50,
+            fields: 'items(id(channelId),snippet(title))',
+            order: 'subscriberCount',
+            channelId: '',
+            topicId: '/m/04rlf' // Topic ID for verified channels
+          }
+        });
+      }).then(function(response) {
+        // Filter out channels with over 100k subscribers and log the channel names to the console
+        response.result.items.forEach(function(item) {
+          var channelId = item.id.channelId;
+          var title = item.snippet.title;
+          gapi.client.youtube.channels.list({
+            part: 'statistics',
+            id: channelId
+          }).then(function(response) {
+            var subscriberCount = response.result.items[0].statistics.subscriberCount;
+            if (parseInt(subscriberCount) < 100000) {
+              console.log('@' + title);
+            }
+          });
+        });
+      }, function(reason) {
+        console.error('Error: ' + reason.result.error.message);
+      });
+    }
+
+    // Call the searchChannels function
+    searchChannels();
+  </script>
+</body>
+</html>
