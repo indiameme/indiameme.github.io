@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YouTube Video Search</title>
+  </head>
+  <body>
+    <button onclick="searchVideo()">Search Video</button>
+    <script>
+      function searchVideo() {
+        var searchTerm = prompt("Enter video name:");
+        if (searchTerm != null && searchTerm != "") {
+          var searchUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + encodeURIComponent(searchTerm) + "&type=video&key=AIzaSyBf4pyJoq-cSwG_YmG48Kxdlbqbvp2BRIs";
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET", searchUrl);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              if (response.items.length > 0) {
+                var videoId = response.items[0].id.videoId;
+                var embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "#creditjonathan";
+                window.location.href = embedUrl;
+              } else {
+                alert("No videos found with that name.");
+              }
+            }
+          };
+          xhr.send();
+        }
+      }
+    </script>
+  </body>
+</html>
