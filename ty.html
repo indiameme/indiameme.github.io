@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>YouTube Video Search</title>
+    <title>W jonathan</title>
+    <style>
+      body {
+        background-color: #6A0DAD;
+        color: white;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
-    <button onclick="searchVideo()">Search Video</button>
-    <script>
-      function searchVideo() {
-        var searchTerm = prompt("Enter video name:");
-        if (searchTerm != null && searchTerm != "") {
-          var searchUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + encodeURIComponent(searchTerm) + "&type=video&key=AIzaSyBf4pyJoq-cSwG_YmG48Kxdlbqbvp2BRIs";
-          var xhr = new XMLHttpRequest();
-          xhr.open("GET", searchUrl);
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-              var response = JSON.parse(xhr.responseText);
-              if (response.items.length > 0) {
-                var videoId = response.items[0].id.videoId;
-                var embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "#creditjonathan";
-                window.location.href = embedUrl;
-              } else {
-                alert("No videos found with that name.");
-              }
-            }
-          };
-          xhr.send();
-        }
+    Beakontop, check chrome://version make sure you are 105 and below
+  </body>
+</html>
+<html>
+  <head>
+    <title>Ingot</title>
+    <style>
+      .fancy-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
       }
-    </script>
+
+      .fancy-button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="javascript:(function() {  var searchTerm = prompt("Enter video name:");  if (searchTerm != null && searchTerm != "") {    var searchUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + encodeURIComponent(searchTerm) + "&type=video&key=AIzaSyC7upipbP4WsgL1Z1mPxJu_5Kp3cwVRYc8";    var xhr = new XMLHttpRequest();    xhr.open("GET", searchUrl);    xhr.onreadystatechange = function() {      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {        var response = JSON.parse(xhr.responseText);        if (response.items.length > 0) {          var videoId = response.items[0].id.videoId;          var embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "#creditjonathan";          window.location.href = embedUrl;        } else {          alert("No videos found with that name.");        }      }    };    xhr.send();  }})();" class="fancy-button">Ingot</a>
   </body>
 </html>
