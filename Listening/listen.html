@@ -1,1 +1,48 @@
 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Checking if enabled...</h1>
+      <p id="status"></p>
+      <p id="counter"></p>
+    </div>
+
+    <script>
+      const url = "https://raw.githubusercontent.com/indiameme/indiameme.github.io/main/Listening/enabled.txt";
+      const delay = 5000; // 5 seconds
+
+      let counter = 0;
+      let enabled = false;
+
+      function checkEnabled() {
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            const lines = data.split("\n");
+            enabled = lines[0].trim() === "TRUE";
+            if (enabled) {
+              const redirectUrl = lines[1].trim();
+              window.open(redirectUrl, "_blank");
+            } else {
+              counter++;
+              document.getElementById("counter").textContent = `Counter: ${counter}`;
+              setTimeout(checkEnabled, delay);
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            setTimeout(checkEnabled, delay);
+          });
+
+        document.getElementById("status").textContent = `Enabled: ${enabled}`;
+      }
+
+      setTimeout(checkEnabled, delay);
+    </script>
+  </body>
+</html>
